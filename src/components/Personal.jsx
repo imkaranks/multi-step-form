@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Button from './Button';
 
-function Personal() {
+function Personal({ handleStep, updateDetails }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  function handleClick() {
+    handleStep(2)
+    updateDetails(prev => ({...prev, name, email, phone}))
+  }
+
   return (
     <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-4 py-8 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
       <Header
@@ -18,6 +27,8 @@ function Personal() {
             id='fullname'
             className="px-4 py-2 border border-gray-cool"
             placeholder='e.g. Stephen King'
+            onChange={(ev) => setName(ev.target.value)}
+            value={name}
           />
         </div>
 
@@ -29,6 +40,8 @@ function Personal() {
             id='email'
             className="px-4 py-2 border border-gray-cool"
             placeholder='e.g. stephenking@lorem.com'
+            onChange={(ev) => setEmail(ev.target.value)}
+            value={email}
           />
         </div>
 
@@ -40,6 +53,8 @@ function Personal() {
             id='phone'
             className="px-4 py-2 border border-gray-cool"
             placeholder='e.g. +1 234 567 890'
+            onChange={(ev) => setPhone(ev.target.value)}
+            value={phone}
           />
         </div>
       </form>
@@ -48,6 +63,7 @@ function Personal() {
         <Button
           type='primary'
           text='Next Step'
+          onClick={handleClick}
         />
       </div>
     </div>
