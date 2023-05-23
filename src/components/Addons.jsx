@@ -2,26 +2,28 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Button from './Button';
 
-function Addons({ handleStep, updateDetails }) {
-  const [ hasOnlineService, setHasOnlineService ] = useState(false);
-  const [ hasMoreStorage, setHasMoreStorage ] = useState(false);
-  const [ hasCustomization, setHasCustomization ] = useState(false);
+function Addons({ handleStep, details, updateDetails }) {
+  const { isYearly, addOns } = details;
+  const [ hasOnlineService, setHasOnlineService ] = useState(addOns[0]?.name ? true : false);
+  const [ hasMoreStorage, setHasMoreStorage ] = useState(addOns[1]?.name ? true : false);
+  const [ hasCustomization, setHasCustomization ] = useState(addOns[2]?.name ? true : false);
 
   function handleClick() {
     handleStep(4);
-    const online = {
-      name: hasOnlineService ? 'Online Service' : null,
-      price: '$1/mo'
-    }
-    const storage = {
-      name: hasMoreStorage ? 'Larger Storage' : null,
-      price: '$1/mo'
-    }
-    const customizable = {
-      name: hasCustomization ? 'Customizable' : null,
-      price: '$1/mo'
-    }
-    const addOns = [online, storage, customizable];
+    const addOns = [
+      {
+        name: hasOnlineService ? 'Online Service' : null,
+        price: isYearly ? '$10/yr' : '$1/mo'
+      },
+      {
+        name: hasMoreStorage ? 'Larger Storage' : null,
+        price: isYearly ? '$20/yr' : '$2/mo'
+      },
+      {
+        name: hasCustomization ? 'Customizable' : null,
+        price: isYearly ? '$20/yr' : '$2/mo'
+      }
+    ];
     updateDetails(prev => ({...prev, addOns}))
   }
 
@@ -45,7 +47,7 @@ function Addons({ handleStep, updateDetails }) {
             <span className='text-blue-marine font-medium'>Online service</span>
             <span className='text-gray-cool'>Access to multiplayer games</span>
           </label>
-          <p className='text-blue-purplish font-medium'>+$1/mo</p>
+          <p className='text-blue-purplish font-medium'>+{details.isYearly ? '$10/yr' : '$1/mo'}</p>
         </div>
 
         <div className='flex items-center gap-4 border border-gray-light p-4 rounded-lg'>
@@ -60,7 +62,7 @@ function Addons({ handleStep, updateDetails }) {
             <span className='text-blue-marine font-medium'>Larger storage</span>
             <span className='text-gray-cool'>Extra 1TB of cloud save</span>
           </label>
-          <p className='text-blue-purplish font-medium'>+$2/mo</p>
+          <p className='text-blue-purplish font-medium'>+{details.isYearly ? '$20/yr' : '$2/mo'}</p>
         </div>
 
         <div className='flex items-center gap-4 border border-gray-light p-4 rounded-lg'>
@@ -75,13 +77,14 @@ function Addons({ handleStep, updateDetails }) {
             <span className='text-blue-marine font-medium'>Customizable Profile</span>
             <span className='text-gray-cool'>Custom theme on your profile</span>
           </label>
-          <p className='text-blue-purplish font-medium'>+$2/mo</p>
+          <p className='text-blue-purplish font-medium'>+{details.isYearly ? '$20/yr' : '$2/mo'}</p>
         </div>
       </div>
 
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
-      <Button
+        <Button
           text='Go Back'
+          onClick={() => handleStep(2)}
         />
         <Button
           type='primary'

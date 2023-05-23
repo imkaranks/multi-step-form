@@ -10,14 +10,32 @@ function Main({ step, handleStep, details, updateDetails }) {
     <main className='sm:flex-[0.7]'>
       {
         step === 1
-        ? <Personal handleStep={handleStep} updateDetails={updateDetails} />
-        : step === 2
-        ? <Plans handleStep={handleStep} updateDetails={updateDetails} />
-        : step === 3
-        ? <Addons handleStep={handleStep} updateDetails={updateDetails} />
-        : step === 4
-        ? <Summary details={details} />
-        : <Success />
+        ? (
+          <Personal
+            handleStep={handleStep}
+            updateDetails={updateDetails}
+          />
+        ) : step === 2
+        ? (
+          <Plans
+            handleStep={handleStep}
+            details={details}
+            updateDetails={updateDetails}
+          />
+        ) : step === 3
+        ? (
+          <Addons
+            handleStep={handleStep}
+            details={details}
+            updateDetails={updateDetails}
+          />
+        ) : step === 4
+        ? (
+          <Summary
+            handleStep={handleStep}
+            details={details}
+          />
+        ) : <Success />
       }
     </main>
   );

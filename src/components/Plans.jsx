@@ -6,21 +6,23 @@ import proIcon from '../assets/images/icon-pro.svg'
 import Button from './Button';
 import './Plans.css';
 
-function Plans({ handleStep, updateDetails }) {
-  const [ hasArcade, setHasArcade ] = useState(false);
-  const [ hasAdvance, setHasAdvance ] = useState(false);
-  const [ hasPro, setHasPro ] = useState(false);
-  const [ isYearly, setIsYearly ] = useState(false);
+function Plans({ handleStep, details, updateDetails }) {
+  const [ hasArcade, setHasArcade ] = useState(details.plan?.name === 'Arcade' || false);
+  const [ hasAdvance, setHasAdvance ] = useState(details.plan?.name === 'Advance' || false);
+  const [ hasPro, setHasPro ] = useState(details.plan?.name === 'Pro' || false);
+  const [ isYearly, setIsYearly ] = useState(details.isYearly);
 
   function handleClick() {
     handleStep(3);
     let plan = {};
-    if (hasArcade) {
-      plan = {name: 'Arcade', price: '$9/mo'}
+    if (details.plan?.name) {
+      plan = details.plan;
+    } else if (hasArcade) {
+      plan = {name: 'Arcade', price: isYearly ? '$90/yr': '$9/mo'}
     } else if (hasAdvance) {
-      plan = {name: 'Advanced', price: '$12/mo'}
+      plan = {name: 'Advanced', price: isYearly ? '$120/yr': '$12/mo'}
     } else if (hasPro) {
-      plan = {name: 'Pro', price: '$15/mo'}
+      plan = {name: 'Pro', price: isYearly ? '$150/yr': '$15/mo'}
     }
     updateDetails(prev => ({...prev, plan, isYearly}))
   }
@@ -34,34 +36,46 @@ function Plans({ handleStep, updateDetails }) {
       <div className="flex flex-col gap-2 mt-8 sm:flex-row">
         <div
           className={`basis-full cursor-pointer flex gap-4 sm:gap-8 sm:flex-col sm:items-start p-4 border ${hasArcade ? 'border-blue-purplish bg-magnolia' : 'border-gray-light'} hover:border-blue-purplish rounded-lg`}
-          onClick={() => setHasArcade(prevState => !prevState)}
+          onClick={() => {
+            setHasArcade(prevState => !prevState);
+            setHasAdvance(false);
+            setHasPro(false);
+          }}
         >
           <img src={arcadeIcon} alt='' role='image' />
           <div>
             <h2 className='text-blue-marine font-medium'>Arcade</h2>
-            <p>$9/mo</p>
+            <p>{isYearly ? '$90/yr': '$9/mo'}</p>
           </div>
         </div>
 
         <div
           className={`basis-full cursor-pointer flex gap-4 sm:gap-8 sm:flex-col sm:items-start p-4 border ${hasAdvance ? 'border-blue-purplish bg-magnolia' : 'border-gray-light'} hover:border-blue-purplish rounded-lg`}
-          onClick={() => setHasAdvance(prevState => !prevState)}
+          onClick={() => {
+            setHasAdvance(prevState => !prevState);
+            setHasPro(false);
+            setHasArcade(false);
+          }}
         >
           <img src={adventureIcon} alt='' role='image' />
           <div>
             <h2 className='text-blue-marine font-medium'>Advanced</h2>
-            <p>$12/mo</p>
+            <p>{isYearly ? '$120/yr': '$12/mo'}</p>
           </div>
         </div>
 
         <div
           className={`basis-full cursor-pointer flex gap-4 sm:gap-8 sm:flex-col sm:items-start p-4 border ${hasPro ? 'border-blue-purplish bg-magnolia' : 'border-gray-light'} hover:border-blue-purplish rounded-lg`}
-          onClick={() => setHasPro(prevState => !prevState)}
+          onClick={() => {
+            setHasPro(prevState => !prevState);
+            setHasArcade(false);
+            setHasAdvance(false);
+          }}
         >
           <img src={proIcon} alt='' role='image' />
           <div>
             <h2 className='text-blue-marine font-medium'>Pro</h2>
-            <p>$15/mo</p>
+            <p>{isYearly ? '$150/yr': '$15/mo'}</p>
           </div>
         </div>
       </div>
@@ -82,6 +96,7 @@ function Plans({ handleStep, updateDetails }) {
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
         <Button
           text='Go Back'
+          onClick={() => handleStep(1)}
         />
         <Button
           type='primary'
