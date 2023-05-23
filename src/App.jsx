@@ -9,10 +9,9 @@ function App() {
     email: '',
     phone: '',
     isYearly: false,
-    plan: {},
+    subscription: {},
     addOns: []
   });
-  console.log(details);
 
   return (
     <div className='w-full max-w-5xl min-h-[80vh] mx-auto flex flex-col rounded-xl sm:w-11/12 sm:bg-white sm:shadow-lg sm:flex-row sm:p-2'>
@@ -21,7 +20,7 @@ function App() {
       />
       <Main
         step={currentStep}
-        handleStep={setCurrentStep}
+        updateStep={setCurrentStep}
         details={details}
         updateDetails={setDetails}
       />

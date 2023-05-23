@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Button from './Button';
 
-function Summary({ handleStep, details }) {
+function Summary({ updateStep, details }) {
   return (
     <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-4 py-8 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
       <Header
@@ -14,17 +14,17 @@ function Summary({ handleStep, details }) {
         <div className='flex items-center justify-between'>
           <div>
             <h2 className="text-blue-marine font-medium">
-              {details.plan.name} <span>({details.isYearly ? 'Yearly' : 'Monthly'})</span>
+              {details.subscription.name} <span>({details.isYearly ? 'Yearly' : 'Monthly'})</span>
             </h2>
             <button
               className='bg-transparent border-none text-blue-purplish underline'
-              aria-label='Change Plan'
-              onClick={() => handleStep(2)}
+              aria-label='Change subscription'
+              onClick={() => updateStep(2)}
             >
               Change
             </button>
           </div>
-          <p>{details.plan.price}</p>
+          <p>{details.subscription.price}</p>
         </div>
 
         <hr className='border-t border-t-gray-light my-4' />
@@ -48,7 +48,7 @@ function Summary({ handleStep, details }) {
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
         <Button
           text='Go Back'
-          onClick={() => handleStep(3)}
+          onClick={() => updateStep(3)}
         />
         <Button
           type='primary'

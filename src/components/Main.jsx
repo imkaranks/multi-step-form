@@ -5,34 +5,34 @@ import Addons from './Addons';
 import Summary from './Summary';
 import Success from './Success';
 
-function Main({ step, handleStep, details, updateDetails }) {
+function Main({ step, updateStep, details, updateDetails }) {
   return (
     <main className='sm:flex-[0.7]'>
       {
         step === 1
         ? (
           <Personal
-            handleStep={handleStep}
+            updateStep={updateStep}
             updateDetails={updateDetails}
           />
         ) : step === 2
         ? (
           <Plans
-            handleStep={handleStep}
+            updateStep={updateStep}
             details={details}
             updateDetails={updateDetails}
           />
         ) : step === 3
         ? (
           <Addons
-            handleStep={handleStep}
+            updateStep={updateStep}
             details={details}
             updateDetails={updateDetails}
           />
         ) : step === 4
         ? (
           <Summary
-            handleStep={handleStep}
+            updateStep={updateStep}
             details={details}
           />
         ) : <Success />

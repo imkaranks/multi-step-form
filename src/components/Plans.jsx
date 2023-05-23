@@ -6,31 +6,46 @@ import proIcon from '../assets/images/icon-pro.svg'
 import Button from './Button';
 import './Plans.css';
 
-function Plans({ handleStep, details, updateDetails }) {
-  const [ hasArcade, setHasArcade ] = useState(details.plan?.name === 'Arcade' || false);
-  const [ hasAdvance, setHasAdvance ] = useState(details.plan?.name === 'Advance' || false);
-  const [ hasPro, setHasPro ] = useState(details.plan?.name === 'Pro' || false);
+function Plans({ updateStep, details, updateDetails }) {
+  const { subscription } = details;
+  const [ hasArcade, setHasArcade ] = useState(subscription?.name === 'Arcade');
+  const [ hasAdvance, setHasAdvance ] = useState(subscription?.name === 'Advance');
+  const [ hasPro, setHasPro ] = useState(subscription?.name === 'Pro');
   const [ isYearly, setIsYearly ] = useState(details.isYearly);
 
-  function handleClick() {
-    handleStep(3);
-    let plan = {};
-    if (details.plan?.name) {
-      plan = details.plan;
+  function proceedNext() {
+    updateStep(3);
+    if (subscription?.name && !(hasArcade || hasAdvance || hasPro)) {
+      updateDetails(prev => ({
+        ...prev,
+        subscription,
+        isYearly
+      }));
     } else if (hasArcade) {
-      plan = {name: 'Arcade', price: isYearly ? '$90/yr': '$9/mo'}
+      updateDetails(prev => ({
+        ...prev,
+        subscription: {name: 'Arcade', price: isYearly ? '$90/yr': '$9/mo'},
+        isYearly
+      }));
     } else if (hasAdvance) {
-      plan = {name: 'Advanced', price: isYearly ? '$120/yr': '$12/mo'}
+      updateDetails(prev => ({
+        ...prev,
+        subscription: {name: 'Advanced', price: isYearly ? '$120/yr': '$12/mo'},
+        isYearly
+      }));
     } else if (hasPro) {
-      plan = {name: 'Pro', price: isYearly ? '$150/yr': '$15/mo'}
+      updateDetails(prev => ({
+        ...prev,
+        subscription: {name: 'Pro', price: isYearly ? '$150/yr': '$15/mo'},
+        isYearly
+      }));
     }
-    updateDetails(prev => ({...prev, plan, isYearly}))
   }
 
   return (
     <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-4 py-8 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
       <Header
-        title='Select your plan'
+        title='Select your subscription'
         desc='You have the option of monthly or yearly billing.'
       />
       <div className="flex flex-col gap-2 mt-8 sm:flex-row">
@@ -80,28 +95,28 @@ function Plans({ handleStep, details, updateDetails }) {
         </div>
       </div>
       <div className='bg-magnolia flex gap-4 justify-center items-center p-2 mt-8 rounded-lg'>
-        <span className="text-blue-marine font-medium">Monthly</span>
-        <label htmlFor="isMonthly" className='sr-only'>Monthly Plan</label>
+        <span className="text-blue-marine font-medium">Monthly {!isYearly && <span className="sr-only">(Subscription Selected)</span>}</span>
+        <label htmlFor="isMonthly" className='sr-only'>Subscription</label>
         <input
           type="checkbox"
-          name="isMonthly"
-          id="isMonthly"
+          name="subscription"
+          id="subscription"
           className='toggle'
           onChange={(ev) => setIsYearly(ev.target.checked)}
           checked={isYearly}
         />
-        <span className="text-blue-marine font-medium">Yearly</span>
+        <span className="text-blue-marine font-medium">Yearly {isYearly && <span className="sr-only">(Subscription Selected)</span>}</span>
       </div>
       
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
         <Button
           text='Go Back'
-          onClick={() => handleStep(1)}
+          onClick={() => updateStep(1)}
         />
         <Button
           type='primary'
           text='Next Step'
-          onClick={handleClick}
+          onClick={proceedNext}
         />
       </div>
     </div>

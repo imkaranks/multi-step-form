@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Button from './Button';
 
-function Addons({ handleStep, details, updateDetails }) {
+function Addons({ updateStep, details, updateDetails }) {
   const { isYearly, addOns } = details;
   const [ hasOnlineService, setHasOnlineService ] = useState(addOns[0]?.name ? true : false);
   const [ hasMoreStorage, setHasMoreStorage ] = useState(addOns[1]?.name ? true : false);
   const [ hasCustomization, setHasCustomization ] = useState(addOns[2]?.name ? true : false);
 
-  function handleClick() {
-    handleStep(4);
+  function proceedNext() {
+    updateStep(4);
     const addOns = [
       {
         name: hasOnlineService ? 'Online Service' : null,
@@ -38,8 +38,8 @@ function Addons({ handleStep, details, updateDetails }) {
         <div className='flex items-center gap-4 border border-gray-light p-4 rounded-lg'>
           <input
             type="checkbox"
-            name=""
-            id=""
+            name="online-service"
+            id="online-service"
             onChange={(ev) => setHasOnlineService(ev.target.checked)}
             checked={hasOnlineService}
           />
@@ -53,8 +53,8 @@ function Addons({ handleStep, details, updateDetails }) {
         <div className='flex items-center gap-4 border border-gray-light p-4 rounded-lg'>
             <input
             type="checkbox"
-            name=""
-            id=""
+            name="more-storage"
+            id="more-storage"
             onChange={(ev) => setHasMoreStorage(ev.target.checked)}
             checked={hasMoreStorage}
           />
@@ -68,8 +68,8 @@ function Addons({ handleStep, details, updateDetails }) {
         <div className='flex items-center gap-4 border border-gray-light p-4 rounded-lg'>
           <input
             type="checkbox"
-            name=""
-            id=""
+            name="customizable"
+            id="customizable"
             onChange={(ev) => setHasCustomization(ev.target.checked)}
             checked={hasCustomization}
           />
@@ -84,12 +84,12 @@ function Addons({ handleStep, details, updateDetails }) {
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
         <Button
           text='Go Back'
-          onClick={() => handleStep(2)}
+          onClick={() => updateStep(2)}
         />
         <Button
           type='primary'
           text='Next Step'
-          onClick={handleClick}
+          onClick={proceedNext}
         />
       </div>
     </div>

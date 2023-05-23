@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Button from './Button';
 
-function Personal({ handleStep, updateDetails }) {
+function Personal({ updateStep, updateDetails }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
-  function handleClick() {
-    handleStep(2)
-    updateDetails(prev => ({...prev, name, email, phone}))
+  function proceedNext() {
+    updateStep(2);
+    updateDetails(prev => ({...prev, name, email, phone}));
   }
 
   return (
@@ -63,7 +63,7 @@ function Personal({ handleStep, updateDetails }) {
         <Button
           type='primary'
           text='Next Step'
-          onClick={handleClick}
+          onClick={proceedNext}
         />
       </div>
     </div>
