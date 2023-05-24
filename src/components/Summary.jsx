@@ -48,11 +48,12 @@ function Summary({ updateStep, details }) {
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
         <Button
           text='Go Back'
-          onClick={() => updateStep(3)}
+          onClick={() => updateStep(prev => prev - 1)}
         />
         <Button
           type='primary'
           text='Confirm'
+          onClick={() => updateStep(prev => prev + 1)}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ function Addons({ updateStep, details, updateDetails }) {
   const [ hasCustomization, setHasCustomization ] = useState(addOns[2]?.name ? true : false);
 
   function proceedNext() {
-    updateStep(4);
+    updateStep(prev => prev + 1);
     const addOns = [
       {
         name: hasOnlineService ? 'Online Service' : null,
@@ -84,7 +84,7 @@ function Addons({ updateStep, details, updateDetails }) {
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
         <Button
           text='Go Back'
-          onClick={() => updateStep(2)}
+          onClick={() => updateStep(prev => prev - 1)}
         />
         <Button
           type='primary'

@@ -16,7 +16,7 @@ function Sidebar({ step }) {
           <li>
             <Step
               count={2}
-              desc='Select subscription'
+              desc='Select plan'
               isActive={step === 2}
             />
           </li>
