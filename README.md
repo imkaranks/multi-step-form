@@ -35,7 +35,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://unique-chaja-2c30bf.netlify.app/](https://unique-chaja-2c30bf.netlify.app/)
 
 ## Project details
 
