@@ -1,7 +1,8 @@
 .toggle {
   --size: 1rem;
+  --edge-gap: 2px;
   all: unset;
-  padding: 0;
+  padding: var(--edge-gap);
   position: relative;
   display: block;
   width: 2rem;
@@ -11,17 +12,16 @@
   background-color: hsl(213, 96%, 18%);
 }
 .toggle::before {
-  --edge: 2px;
   position: absolute;
   content: '';
-  top: calc(var(--edge) / 4);
-  left: calc(var(--edge) / 4);
-  width: calc(var(--size) - var(--edge));
+  top: var(--edge-gap);
+  left: var(--edge-gap);
+  bottom: var(--edge-gap);
   aspect-ratio: 1;
   background-color: white;
   border-radius: 50%;
 }
 .toggle:checked:before {
   left: unset;
-  right: calc(var(--edge) / 4);
+  right: var(--edge-gap);
 }

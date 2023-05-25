@@ -3,7 +3,7 @@ import Step from './Step';
 
 function Sidebar({ step }) {
   return (
-    <aside className='bg-[url(./src/assets/images/bg-sidebar-mobile.svg)] bg-cover bg-no-repeat pt-8 pb-20 sm:p-4 sm:bg-[url(./src/assets/images/bg-sidebar-desktop.svg)] sm:flex-[0.3] sm:rounded-xl'>
+    <aside className='bg-[url(./src/assets/images/bg-sidebar-mobile.svg)] bg-cover bg-no-repeat pt-8 pb-24 sm:p-4 sm:bg-[url(./src/assets/images/bg-sidebar-desktop.svg)] sm:flex-[0.3] sm:rounded-xl'>
       <div className=''>
         <ol className='flex justify-center gap-4 sm:flex-col'>
           <li>
@@ -31,7 +31,7 @@ function Sidebar({ step }) {
             <Step
               count={4}
               desc='Summary'
-              isActive={step === 4}
+              isActive={step === 4 || step === 5}
             />
           </li>
         </ol>

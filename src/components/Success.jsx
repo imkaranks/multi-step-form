@@ -3,7 +3,7 @@ import successIcon from '../assets/images/icon-thank-you.svg';
 
 function Success() {
   return (
-    <div className='text-center p-4'>
+    <div className='w-11/12 max-w-lg mx-auto bg-white text-center -mt-16 rounded-lg shadow-lg px-8 py-20 h-full flex flex-col justify-center sm:shadow-none sm:p-4 sm:mt-0'>
       <img
         src={successIcon}
         alt='' /* # left empty as it is decoration asset # */

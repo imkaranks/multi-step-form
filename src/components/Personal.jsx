@@ -57,7 +57,7 @@ function Personal({ updateStep, updateDetails }) {
   }, [name, email, phone]);
 
   return (
-    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-4 py-8 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
+    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
       <Header
         title='Personal info'
         desc='Please provide your name, email address, and phone number.'

@@ -10,7 +10,7 @@ function Summary({ updateStep, details }) {
   }, 0);
 
   return (
-    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-4 py-8 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
+    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
       <Header
         title='Finishing up'
         desc='Double-check everything looks OK before confirming.'
@@ -23,7 +23,7 @@ function Summary({ updateStep, details }) {
               {name} <span>({isYearly ? 'Yearly' : 'Monthly'})</span>
             </h2>
             <button
-              className='bg-transparent border-none text-blue-purplish underline'
+              className='bg-transparent border-none text-blue-pastel underline hover:text-blue-purplish'
               aria-label='Change subscription'
               onClick={() => updateStep(2)}
             >
@@ -43,7 +43,7 @@ function Summary({ updateStep, details }) {
                   <h2 className="text-gray-cool">
                     {addOn.name}
                   </h2>
-                  <p className='text-blue-purplish font-medium'>+{formatPrice(addOn.price, isYearly)}</p>
+                  <p className='text-blue-marine font-medium'>+{formatPrice(addOn.price, isYearly)}</p>
                 </div>
               )
             }
