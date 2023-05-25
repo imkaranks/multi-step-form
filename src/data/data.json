@@ -1,0 +1,60 @@
+{
+  "plans": [
+    {
+      "id": 0,
+      "name": "Arcade",
+      "imgURL": "./icon-arcade.svg",
+      "price": {
+        "yearly": "90",
+        "monthly": "9"
+      }
+    },
+    {
+      "id": 1,
+      "name": "Advance",
+      "imgURL": "./icon-advanced.svg",
+      "price": {
+        "yearly": "120",
+        "monthly": "12"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Pro",
+      "imgURL": "./icon-pro.svg",
+      "price": {
+        "yearly": "150",
+        "monthly": "15"
+      }
+    }
+  ],
+  "addons": [
+    {
+      "id": 0,
+      "name": "Online Service",
+      "desc": "Access to multiplayer games",
+      "price": {
+        "yearly": "10",
+        "monthly": "1"
+      }
+    },
+    {
+      "id": 1,
+      "name": "Larger Storage",
+      "desc": "Extra 1TB of cloud save",
+      "price": {
+        "yearly": "20",
+        "monthly": "2"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Customizable",
+      "desc": "Custom theme on your profile",
+      "price": {
+        "yearly": "20",
+        "monthly": "2"
+      }
+    }
+  ]
+}

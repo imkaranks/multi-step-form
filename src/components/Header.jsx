@@ -4,7 +4,7 @@ function Header({ title, desc }) {
   return (
     <header>
       <h1 className='text-blue-marine text-3xl font-bold'>{title}</h1>
-      <p className='text-gray-cool font-medium'>{desc}</p>
+      <p className='text-gray-cool'>{desc}</p>
     </header>
   );
 }
