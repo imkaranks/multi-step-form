@@ -2,9 +2,14 @@ import React from 'react';
 import Step from './Step';
 
 function Sidebar({ step }) {
+  const styles = {
+    '--mobile': 'url(/bg-sidebar-mobile.svg)',
+    '--desktop': 'url(/bg-sidebar-desktop.svg)'
+  }
+
   return (
-    <aside className='bg-[url(./src/assets/images/bg-sidebar-mobile.svg)] bg-cover bg-no-repeat pt-8 pb-24 sm:p-4 sm:bg-[url(./src/assets/images/bg-sidebar-desktop.svg)] sm:flex-[0.3] sm:rounded-xl'>
-      <div className=''>
+    <aside className='bg-[image:var(--mobile)] bg-cover bg-bottom bg-no-repeat pt-8 pb-24 sm:bg-[image:var(--desktop)] sm:p-4 sm:flex-[0.3] sm:rounded-xl' style={styles}>
+      <div>
         <ol className='flex justify-center gap-4 sm:flex-col'>
           <li>
             <Step
