@@ -10,7 +10,7 @@ function Sidebar({ step }) {
   return (
     <aside className='bg-[image:var(--mobile)] bg-cover bg-bottom bg-no-repeat pt-8 pb-24 sm:bg-[image:var(--desktop)] sm:p-4 sm:flex-[0.3] sm:rounded-xl' style={styles}>
       <div>
-        <ol className='flex justify-center gap-4 sm:flex-col'>
+        <ol className='flex justify-center gap-6 sm:flex-col'>
           <li>
             <Step
               count={1}

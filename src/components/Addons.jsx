@@ -47,6 +47,7 @@ function Addons({ updateStep, details, updateDetails, addOnsDb }) {
                     [name]: ev.target.checked
                   }))}
                   checked={checked[name]}
+                  style={{'accentColor': 'hsl(243, 100%, 62%)'}}
                 />
                 <label htmlFor={hyphenate(name)} className='flex-1 flex flex-col'>
                   <span className='text-blue-marine font-medium'>{name}</span>
