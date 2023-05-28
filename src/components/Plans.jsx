@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Header';
-import Button from './Button';
 import PlanOption from './PlanOption';
+import FormContainer from './FormContainer';
 import './Plans.css';
 
 function Plans({ updateStep, details, updateDetails, plansDb }) {
@@ -10,7 +9,8 @@ function Plans({ updateStep, details, updateDetails, plansDb }) {
   const [ activeId, setActiveId ] = useState(subscription?.id ?? null);
   const [ activePlan, setActivePlan ] = useState({});
 
-  function proceedNext() {
+  function handleSubmit(ev) {
+    ev.preventDefault();
     if (Object.keys(activePlan).length) {
       updateStep(prev => prev + 1);
       updateDetails(prev => ({
@@ -47,12 +47,13 @@ function Plans({ updateStep, details, updateDetails, plansDb }) {
   }, [isYearly]);
 
   return (
-    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
-      <Header
-        title='Select your plan'
-        desc='You have the option of monthly or yearly billing.'
-      />
-      <div className="flex flex-col gap-2 mt-8 sm:flex-row">
+    <FormContainer
+      title='Select your plan'
+      desc='You have the option of monthly or yearly billing.'
+      updateStep={updateStep}
+      handleSubmit={handleSubmit}
+    >
+      <div role='radiogroup' className="flex flex-col gap-2 mt-8 sm:flex-row">
         {
           plansDb.map((plan, id) => (
             <PlanOption
@@ -65,7 +66,7 @@ function Plans({ updateStep, details, updateDetails, plansDb }) {
           ))
         }
       </div>
-      <div className='bg-magnolia flex gap-4 justify-center items-center p-2 mt-8 rounded-lg'>
+      <div className='bg-magnolia flex gap-4 justify-center items-center p-2 mt-8 mb-20 sm:mb-0 rounded-lg'>
         <span className={`${!isYearly ? 'text-blue-marine' : 'text-gray-cool'} font-medium`}>Monthly {!isYearly && <span className="sr-only">(Subscription Selected)</span>}</span>
         <label htmlFor="subscription" className='sr-only'>Subscription</label>
         <input
@@ -78,20 +79,8 @@ function Plans({ updateStep, details, updateDetails, plansDb }) {
         />
         <span className={`${isYearly ? 'text-blue-marine' : 'text-gray-cool'} font-medium`}>Yearly {isYearly && <span className="sr-only">(Subscription Selected)</span>}</span>
       </div>
-      
-      <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
-        <Button
-          text='Go Back'
-          onClick={() => updateStep(prev => prev - 1)}
-        />
-        <Button
-          type='primary'
-          text='Next Step'
-          onClick={proceedNext}
-        />
-      </div>
-    </div>
-  );
+    </FormContainer>
+  )
 }
 
 export default Plans;

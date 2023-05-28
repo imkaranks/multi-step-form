@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import Button from './Button';
 import { formatPrice } from '../utils/helper';
 
@@ -10,11 +9,11 @@ function Summary({ updateStep, details }) {
   }, 0);
 
   return (
-    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
-      <Header
-        title='Finishing up'
-        desc='Double-check everything looks OK before confirming.'
-      />
+    <section className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
+      <header className='flex flex-col gap-2'>
+        <h1 className='text-blue-marine text-3xl font-bold'>Finishing up</h1>
+        <p className='text-gray-cool'>Double-check everything looks OK before confirming.</p>
+      </header>
 
       <div className="bg-alabester p-4 mt-8 rounded-lg">
         <div className='flex items-center justify-between'>
@@ -68,7 +67,7 @@ function Summary({ updateStep, details }) {
           onClick={() => updateStep(prev => prev + 1)}
         />
       </div>
-    </div>
+    </section>
   );
 }
 

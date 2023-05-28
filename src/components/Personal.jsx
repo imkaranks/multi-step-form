@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Header';
-import Button from './Button';
+import FormContainer from './FormContainer';
 
 const nameRegex = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -17,7 +16,8 @@ function Personal({ updateStep, updateDetails }) {
   const [ isPhoneValid, setIsPhoneValid ] = useState(false);
   const [ phoneErrMsg, setPhoneErrMsg ] = useState('');
 
-  function proceedNext() {
+  function handleSubmit(ev) {
+    ev.preventDefault();
     if (isNameValid && isEmailValid && isPhoneValid) {
       updateStep(prev => prev + 1);
       updateDetails(prev => ({...prev, name, email, phone}));
@@ -57,12 +57,12 @@ function Personal({ updateStep, updateDetails }) {
   }, [name, email, phone]);
 
   return (
-    <div className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
-      <Header
-        title='Personal info'
-        desc='Please provide your name, email address, and phone number.'
-      />
-      <form className='flex flex-col gap-4 mt-8'>
+    <FormContainer
+      title='Personal info'
+      desc='Please provide your name, email address, and phone number.'
+      handleSubmit={handleSubmit}
+    >
+      <div className='flex flex-col gap-4 mt-8'>
         <div className="relative flex flex-col">
           <label htmlFor="fullname" className='text-blue-marine font-medium'>Name</label>
           <input
@@ -113,17 +113,9 @@ function Personal({ updateStep, updateDetails }) {
           />
           {(phoneErrMsg || (phone !== '' && !isPhoneValid)) && <p className='absolute top-0 right-0 text-strawberry-red font-medium' aria-live='polite'>{phoneErrMsg}</p>}
         </div>
-      </form>
-
-      <div className="fixed left-0 right-0 bottom-0 flex justify-end items-center p-4 bg-white sm:mt-auto sm:static sm:p-0">
-        <Button
-          type='primary'
-          text='Next Step'
-          onClick={proceedNext}
-        />
       </div>
-    </div>
-  );
+    </FormContainer>
+  )
 }
 
 export default Personal;
