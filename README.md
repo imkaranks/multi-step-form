@@ -9,7 +9,7 @@ This is a solution to the [Multi-step form challenge on Frontend Mentor](https:/
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [Project details](#project-details)
-  - [Install and run](#install-and-run)
+  - [Installation Guide](#installation-guide)
   - [Built with](#built-with)
 - [Author](#author)
 
@@ -31,7 +31,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./design/desktop-preview.jpg)
+![Desktop Preview](./design/desktop-preview.jpg)
 
 ### Links
 
@@ -39,11 +39,11 @@ Users should be able to:
 
 ## Project details
 
-### Install and run
+### Installation Guide
 
 #### Step 1
 
-Install required dependency
+Install required dependencies
 
 ```
 npm install
