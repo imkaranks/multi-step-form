@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from './Button';
 import { formatPrice } from '../utils/helper';
+import { motion } from 'framer-motion';
+import { enterSideway } from '../utils/variants';
 
 function Summary({ updateStep, details }) {
   const { isYearly, addOns, subscription: { name, price } } = details;
@@ -10,10 +12,21 @@ function Summary({ updateStep, details }) {
 
   return (
     <section className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
-      <header className='flex flex-col gap-2'>
-        <h1 className='text-blue-marine text-3xl font-bold'>Finishing up</h1>
-        <p className='text-gray-cool'>Double-check everything looks OK before confirming.</p>
-      </header>
+      <motion.header
+        className='flex flex-col gap-2'
+        initial="hidden"
+        whileInView="show"
+        transition={{staggerChildren: 0.1, delayChildren: 0.2}}
+      >
+        <motion.h1
+          className='text-blue-marine text-3xl font-bold'
+          variants={enterSideway}
+        >Finishing up</motion.h1>
+        <motion.p
+          className='text-gray-cool'
+          variants={enterSideway}
+        >Double-check everything looks OK before confirming.</motion.p>
+      </motion.header>
 
       <div className="bg-alabester p-4 mt-8 rounded-lg">
         <div className='flex items-center justify-between'>

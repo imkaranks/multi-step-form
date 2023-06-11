@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from './Button';
+import { motion } from 'framer-motion';
+import { enterSideway } from '../utils/variants';
 
 function FormContainer({ title, desc, updateStep, handleSubmit, children }) {
   return (
@@ -8,10 +10,21 @@ function FormContainer({ title, desc, updateStep, handleSubmit, children }) {
       onSubmit={handleSubmit}
     >
       <fieldset>
-        <div className='flex flex-col gap-2'>
-          <legend className='text-blue-marine text-3xl font-bold'>{title}</legend>
-          <p className='text-gray-cool'>{desc}</p>
-        </div>
+        <motion.div
+          className='flex flex-col gap-2'
+          initial="hidden"
+          whileInView="show"
+          transition={{staggerChildren: 0.1, delayChildren: 0.2}}
+        >
+          <motion.legend
+            className='text-blue-marine text-3xl font-bold'
+            variants={enterSideway}
+          >{title}</motion.legend>
+          <motion.p
+            className='text-gray-cool'
+            variants={enterSideway}
+          >{desc}</motion.p>
+        </motion.div>
         {children}
       </fieldset>
 
