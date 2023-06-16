@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import FormContainer from './FormContainer';
 import { formatPrice, hyphenate } from '../utils/helper';
+import { AppContext } from '../App';
 
-function Addons({ updateStep, details, updateDetails, addOnsDb }) {
+function Addons({ addOnsDb }) {
+  const { updateStep, details, updateDetails } = useContext(AppContext);
   const { isYearly } = details;
   const initialState = {};
   addOnsDb.forEach(({ name }, id) => {

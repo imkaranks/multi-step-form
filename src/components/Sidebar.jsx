@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Step from './Step';
 import { motion } from "framer-motion";
 import { enterSideway } from "../utils/variants";
+import { AppContext } from '../App';
 
-function Sidebar({ step }) {
+function Sidebar() {
+  const { step } = useContext(AppContext);
   const styles = {
     '--mobile': 'url(/bg-sidebar-mobile.svg)',
     '--desktop': 'url(/bg-sidebar-desktop.svg)'

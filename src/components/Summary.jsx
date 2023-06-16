@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from './Button';
 import { formatPrice } from '../utils/helper';
 import { motion } from 'framer-motion';
 import { enterSideway } from '../utils/variants';
+import { AppContext } from '../App';
 
-function Summary({ updateStep, details }) {
+function Summary() {
+  const { updateStep, details } = useContext(AppContext);
   const { isYearly, addOns, subscription: { name, price } } = details;
   const total = parseInt(price) + addOns.reduce((acc, addOn) => {
     return acc + parseInt(addOn?.price ?? 0);

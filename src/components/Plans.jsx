@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AppContext } from '../App';
 import PlanOption from './PlanOption';
 import FormContainer from './FormContainer';
 import './Plans.css';
 
-function Plans({ updateStep, details, updateDetails, plansDb }) {
+function Plans({ plansDb }) {
+  const { updateStep, details, updateDetails } = useContext(AppContext);
   const { subscription } = details;
   const [ isYearly, setIsYearly ] = useState(details.isYearly);
   const [ activeId, setActiveId ] = useState(subscription?.id ?? null);

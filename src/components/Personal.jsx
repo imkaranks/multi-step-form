@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import FormContainer from './FormContainer';
+import { AppContext } from '../App';
 
 const nameRegex = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const phoneRegex = /^\d{10}$/;
 
-function Personal({ updateStep, updateDetails }) {
+function Personal() {
   const [ name, setName ] = useState('');
   const [ isNameValid, setIsNameValid ] = useState(false);
   const [ nameErrMsg, setNameErrMsg ] = useState('');
@@ -15,6 +16,7 @@ function Personal({ updateStep, updateDetails }) {
   const [ phone, setPhone ] = useState('');
   const [ isPhoneValid, setIsPhoneValid ] = useState(false);
   const [ phoneErrMsg, setPhoneErrMsg ] = useState('');
+  const { updateStep, updateDetails } = useContext(AppContext);
 
   function handleSubmit(ev) {
     ev.preventDefault();
