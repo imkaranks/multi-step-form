@@ -5,11 +5,11 @@ import Addons from './Addons';
 import Summary from './Summary';
 import Success from './Success';
 import data from '../data/data.json';
-import { AppContext } from '../App';
+import FormContext from '../context/FormContext';
 
 function Main() {
   const { plans, addons } = data;
-  const { step } = useContext(AppContext);
+  const { step } = useContext(FormContext);
 
   return (
     <main className='sm:flex-[0.7]'>

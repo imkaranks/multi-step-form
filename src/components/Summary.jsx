@@ -3,10 +3,10 @@ import Button from './Button';
 import { formatPrice } from '../utils/helper';
 import { motion } from 'framer-motion';
 import { enterSideway } from '../utils/variants';
-import { AppContext } from '../App';
+import FormContext from '../context/FormContext';
 
 function Summary() {
-  const { updateStep, details } = useContext(AppContext);
+  const { updateStep, details } = useContext(FormContext);
   const { isYearly, addOns, subscription: { name, price } } = details;
   const total = parseInt(price) + addOns.reduce((acc, addOn) => {
     return acc + parseInt(addOn?.price ?? 0);
