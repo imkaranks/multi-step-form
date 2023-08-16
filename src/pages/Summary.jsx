@@ -1,19 +1,24 @@
 import React, { useContext } from 'react';
-import Button from './Button';
 import { formatPrice } from '../utils/helper';
 import { motion } from 'framer-motion';
 import { enterSideway } from '../utils/variants';
-import FormContext from '../context/FormContext';
+import { FormContext } from '../context/FormContext';
+import { Link } from 'react-router-dom';
 
 function Summary() {
-  const { updateStep, details } = useContext(FormContext);
+  const { details } = useContext(FormContext);
   const { isYearly, addOns, subscription: { name, price } } = details;
   const total = parseInt(price) + addOns.reduce((acc, addOn) => {
     return acc + parseInt(addOn?.price ?? 0);
   }, 0);
 
   return (
-    <section className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'>
+    <motion.section
+      className='w-11/12 max-w-lg mx-auto bg-white -mt-16 rounded-lg shadow-lg px-8 py-10 h-full flex flex-col sm:shadow-none sm:p-4 sm:mt-0'
+      variants={enterSideway}
+      initial="hidden"
+      animate="show"
+    >
       <motion.header
         className='flex flex-col gap-2'
         initial="hidden"
@@ -36,13 +41,7 @@ function Summary() {
             <h2 className="text-blue-marine font-medium">
               {name} <span>({isYearly ? 'Yearly' : 'Monthly'})</span>
             </h2>
-            <button
-              className='bg-transparent border-none text-blue-pastel underline hover:text-blue-purplish'
-              aria-label='Change subscription'
-              onClick={() => updateStep(2)}
-            >
-              Change
-            </button>
+            <Link to='/plans' className='bg-transparent border-none text-blue-pastel underline hover:text-blue-purplish'>Change</Link>
           </div>
           <p>{formatPrice(price, isYearly)}</p>
         </div>
@@ -72,17 +71,10 @@ function Summary() {
       </div>
 
       <div className='fixed left-0 right-0 bottom-0 flex items-center justify-between p-4 bg-white sm:mt-auto sm:static sm:p-0'>
-        <Button
-          text='Go Back'
-          onClick={() => updateStep(prev => prev - 1)}
-        />
-        <Button
-          type='primary'
-          text='Confirm'
-          onClick={() => updateStep(prev => prev + 1)}
-        />
+        <Link to='/addons' className='font-medium px-6 py-2 border-none text-gray-cool rounded-lg hover:text-blue-marine'>Go Back</Link>
+        <Link to='/success' className='font-medium px-6 py-2 border-none bg-blue-marine text-white rounded-lg hover:bg-blue-purplish'>Confirm</Link>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

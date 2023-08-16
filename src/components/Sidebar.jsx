@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Step from './Step';
 import { motion } from "framer-motion";
 import { enterSideway } from "../utils/variants";
-import FormContext from '../context/FormContext';
 
 function Sidebar() {
-  const { step } = useContext(FormContext);
+  const { pathname } = useLocation();
+
   const styles = {
     '--mobile': 'url(/bg-sidebar-mobile.svg)',
     '--desktop': 'url(/bg-sidebar-desktop.svg)'
@@ -31,28 +32,28 @@ function Sidebar() {
             <Step
               count={1}
               desc='Your info'
-              isActive={step === 1}
+              isActive={pathname === '/'}
             />
           </motion.li>
           <motion.li variants={enterSideway}>
             <Step
               count={2}
               desc='Select plan'
-              isActive={step === 2}
+              isActive={pathname === '/plans'}
             />
           </motion.li>
           <motion.li variants={enterSideway}>
             <Step
               count={3}
               desc='Add-ons'
-              isActive={step === 3}
+              isActive={pathname === '/addons'}
             />
           </motion.li>
           <motion.li variants={enterSideway}>
             <Step
               count={4}
               desc='Summary'
-              isActive={step === 4 || step === 5}
+              isActive={pathname === '/summary' || pathname === '/success'}
             />
           </motion.li>
         </motion.ol>

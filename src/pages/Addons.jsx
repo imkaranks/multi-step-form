@@ -1,10 +1,13 @@
 import React, { useState, useContext } from 'react';
-import FormContainer from './FormContainer';
+import { Link } from 'react-router-dom';
+import FormContainer from '../components/FormContainer';
 import { formatPrice, hyphenate } from '../utils/helper';
-import FormContext from '../context/FormContext';
+import { FormContext } from '../context/FormContext';
+import { motion } from "framer-motion";
+import { enterSideway } from "../utils/variants";
 
 function Addons({ addOnsDb }) {
-  const { updateStep, details, updateDetails } = useContext(FormContext);
+  const { details, updateDetails } = useContext(FormContext);
   const { isYearly } = details;
   const initialState = {};
   addOnsDb.forEach(({ name }, id) => {
@@ -12,9 +15,7 @@ function Addons({ addOnsDb }) {
   })
   const [ checked, setChecked ] = useState(initialState);
 
-  function handleSubmit(ev) {
-    ev.preventDefault();
-    updateStep(prev => prev + 1);
+  function handleSubmit() {
     const keys = Object.keys(checked).filter(key => checked[key]);
     const addOns = addOnsDb.map(({name, price}) => {
       if (keys.some(key => name === key)) {
@@ -25,16 +26,23 @@ function Addons({ addOnsDb }) {
       }
     });
     updateDetails(prev => ({...prev, addOns}));
+    return true;
   }
 
   return (
     <FormContainer
       title='Pick add-ons'
       desc='Add-ons help enhance your gaming experience.'
-      updateStep={updateStep}
       handleSubmit={handleSubmit}
+      prevRoute='/plans'
+      nextRoute='/summary'
     >
-      <div className='flex flex-col gap-4 mt-8 mb-20 sm:mb-0'>
+      <motion.div
+        className='flex flex-col gap-4 mt-8 mb-20 sm:mb-0'
+        variants={enterSideway}
+        initial="hidden"
+        animate="show"
+      >
         {
           addOnsDb.map(({ name, desc, price: {yearly, monthly} }, id) => (
             <div key={id} className='flex items-center gap-4 border border-gray-light p-4 rounded-lg'>
@@ -57,7 +65,7 @@ function Addons({ addOnsDb }) {
             </div>
           ))
         }
-      </div>
+      </motion.div>
     </FormContainer>
   )
 }

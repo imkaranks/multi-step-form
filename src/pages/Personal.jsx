@@ -1,32 +1,34 @@
 import React, { useEffect, useState, useContext } from 'react';
-import FormContainer from './FormContainer';
-import FormContext from '../context/FormContext';
+import FormContainer from '../components/FormContainer';
+import { FormContext } from '../context/FormContext';
+import { motion } from "framer-motion";
+import { enterSideway } from "../utils/variants";
 
 const nameRegex = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const phoneRegex = /^\d{10}$/;
 
 function Personal() {
-  const [ name, setName ] = useState('');
+  const { details, updateDetails } = useContext(FormContext);
+  const [ name, setName ] = useState(details.name);
   const [ isNameValid, setIsNameValid ] = useState(false);
   const [ nameErrMsg, setNameErrMsg ] = useState('');
-  const [ email, setEmail ] = useState('');
+  const [ email, setEmail ] = useState(details.email);
   const [ isEmailValid, setIsEmailValid ] = useState(false);
   const [ emailErrMsg, setEmailErrMsg ] = useState('');
-  const [ phone, setPhone ] = useState('');
+  const [ phone, setPhone ] = useState(details.phone);
   const [ isPhoneValid, setIsPhoneValid ] = useState(false);
   const [ phoneErrMsg, setPhoneErrMsg ] = useState('');
-  const { updateStep, updateDetails } = useContext(FormContext);
 
-  function handleSubmit(ev) {
-    ev.preventDefault();
+  function handleSubmit() {
     if (isNameValid && isEmailValid && isPhoneValid) {
-      updateStep(prev => prev + 1);
       updateDetails(prev => ({...prev, name, email, phone}));
+      return true;
     } else {
       validateInput(name, isNameValid, setNameErrMsg);
       validateInput(email, isEmailValid, setEmailErrMsg);
       validateInput(phone, isPhoneValid, setPhoneErrMsg);
+      return false;
     }
   }
 
@@ -63,8 +65,14 @@ function Personal() {
       title='Personal info'
       desc='Please provide your name, email address, and phone number.'
       handleSubmit={handleSubmit}
+      nextRoute='/plans'
     >
-      <div className='flex flex-col gap-4 mt-8'>
+      <motion.div
+        className='flex flex-col gap-4 mt-8'
+        variants={enterSideway}
+        initial="hidden"
+        animate="show"
+      >
         <div className="relative flex flex-col">
           <label htmlFor="fullname" className='text-blue-marine font-medium'>Name</label>
           <input
@@ -115,7 +123,7 @@ function Personal() {
           />
           {(phoneErrMsg || (phone !== '' && !isPhoneValid)) && <p className='absolute top-0 right-0 text-strawberry-red font-medium' aria-live='polite'>{phoneErrMsg}</p>}
         </div>
-      </div>
+      </motion.div>
     </FormContainer>
   )
 }

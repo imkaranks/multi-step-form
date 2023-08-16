@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import successIcon from '../assets/images/icon-thank-you.svg';
+import { motion } from "framer-motion";
+import { enterSideway } from "../utils/variants";
 
 function Success() {
   const [imgLoading, setImgLoading] = useState(true);
 
   return (
-    <section className='w-11/12 max-w-lg mx-auto bg-white text-center -mt-16 rounded-lg shadow-lg px-8 py-20 h-full flex flex-col justify-center sm:shadow-none sm:p-4 sm:mt-0'>
+    <motion.section
+      className='w-11/12 max-w-lg mx-auto bg-white text-center -mt-16 rounded-lg shadow-lg px-8 py-20 h-full flex flex-col justify-center sm:shadow-none sm:p-4 sm:mt-0'
+      variants={enterSideway}
+      initial="hidden"
+      animate="show"
+    >
       <div className={`bg-magnolia rounded-full w-20 h-20 aspect-square mx-auto ${imgLoading && 'animate-pulse'}`}>
         <img
           src={successIcon}
@@ -21,7 +29,7 @@ function Success() {
         using our platform. If you ever need support, please feel free 
         to email us at support@loremgaming.com.
       </p>
-    </section>
+    </motion.section>
   );
 }
 
